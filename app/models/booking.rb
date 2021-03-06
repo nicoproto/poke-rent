@@ -10,11 +10,11 @@ class Booking < ApplicationRecord
 
   enum status: [ :pending, :accepted, :declined ]
 
-  private
-
   def duration
     @duration ||= (end_date - start_date).to_i
   end
+
+  private
 
   def set_total_price
     self.total_price = duration * pokemon.price
