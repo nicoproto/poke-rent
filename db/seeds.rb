@@ -46,6 +46,13 @@ gary = User.create!(email: "gary@pokemon.com", password: "password", nickname: "
 puts "👥 Done creating users ✅"
 line
 
+puts "🔥 Creating pokemon kinds 💧"
+Kind::CATEGORIES.each do |kind_name|
+  Kind.create!(name: kind_name)
+end
+puts "🔥 Done creating pokemon kinds ✅"
+line
+
 puts "👨‍🔬 Creating new pokemons... 👩‍🔬"
 pokemons.each do |pokemon_name|
   # Getting pokemon name and type
@@ -76,7 +83,7 @@ pokemons.each do |pokemon_name|
   )
 
   pokemon['types'].each do |pokemon_type|
-    kind = Kind.find_or_create_by(name: pokemon_type['type']['name'])
+    kind = Kind.find(name: pokemon_type['type']['name'])
 
     KindsPokemon.create!(pokemon: new_pokemon, kind: kind)
   end
@@ -110,7 +117,7 @@ Pokemon.all.each do |pokemon|
 end
 
 puts "Total pokemons 🐶: #{Pokemon.count}"
-puts "Types created 🔥💦🍃: #{Kind.all.map {|kind| kind.name.capitalize }.join(', ')}"
+puts "Kinds created 🔥💦🍃: #{Kind.all.map {|kind| kind.name.capitalize }.join(', ')}"
 puts "Total users 👥: #{User.count}"
 puts "Total bookings 🧾: #{Booking.count}"
 puts "Total reviews 🗣: #{Review.count}"
