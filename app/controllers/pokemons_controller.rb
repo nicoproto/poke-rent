@@ -1,9 +1,12 @@
 class PokemonsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :set_pokemon, only: [:show]
 
   def index
     @pokemons = Pokemon.all
   end
+
+  def show; end
 
   def new
     @pokemon = Pokemon.new
@@ -25,5 +28,9 @@ class PokemonsController < ApplicationController
   def pokemon_params
     # TODO: Add kinds when ready
     params.require(:pokemon).permit(:name, :description, :price, :location)
+  end
+
+  def set_pokemon
+    @pokemon = Pokemon.find(params[:id])
   end
 end

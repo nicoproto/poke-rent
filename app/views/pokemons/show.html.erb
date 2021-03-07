@@ -1,0 +1,26 @@
+<div class="container col-4">
+  <h1 class="text-center"><%= @pokemon.name.capitalize %></h1>
+  <p><strong>Price: </strong>$<%= @pokemon.price %> / day</p>
+  <p><strong>Location: </strong><%= @pokemon.location %></p>
+  <div>
+    <h4>Description</h4>
+    <p><%= @pokemon.description %></p>
+  </div>
+
+  <div>
+    <h4>Types</h4>
+    <% @pokemon.kinds.each do |kind| %>
+      <div class="badge badge-primary mb-3">
+        <%= kind.name %>
+      </div>
+    <% end %>
+  </div>
+
+  <h4>Reviews</h4>
+  <% @pokemon.reviews.each do |review| %>
+    <div>
+      <p><%= review.rating %> stars - <%= review.content %></p>
+      <p class="w-100 text-right"><strong>- <%= review.user.nickname.capitalize %></strong></p>
+    </div>
+  <% end %>
+</div>
