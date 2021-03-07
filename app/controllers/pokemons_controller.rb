@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
-  before_action :set_pokemon, only: [:show]
+  before_action :set_pokemon, only: [:show, :edit, :update]
 
   def index
     @pokemons = Pokemon.all
@@ -20,6 +20,18 @@ class PokemonsController < ApplicationController
       redirect_to pokemon_path(@pokemon)
     else
       render :new
+    end
+  end
+
+  def edit; end
+
+  def update
+    @pokemon.update(pokemon_params)
+
+    if @pokemon.save
+      redirect_to pokemon_path(@pokemon)
+    else
+      render :edit
     end
   end
 

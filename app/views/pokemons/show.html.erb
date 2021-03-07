@@ -23,4 +23,8 @@
       <p class="w-100 text-right"><strong>- <%= review.user.nickname.capitalize %></strong></p>
     </div>
   <% end %>
+
+  <h4>Manage</h4>
+  <%= link_to "Edit", edit_pokemon_path(@pokemon), class: "btn btn-outline-primary"  %>
+  <%= link_to "Back", root_path, class: "btn btn-link"  %>
 </div>
