@@ -2,7 +2,7 @@
   <h1 class="text-center">Pokemon's Index</h1>
   <div class="cards">
     <% @pokemons.each do |pokemon| %>
-      <div class="card" style="width: 18rem;">
+      <div class="card mx-auto" style="width: 18rem;">
         <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
         <div class="card-body">
           <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
