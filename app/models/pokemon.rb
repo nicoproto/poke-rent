@@ -6,7 +6,7 @@ class Pokemon < ApplicationRecord
   has_many :kinds_pokemons
   has_many :kinds, through: :kinds_pokemons
 
-  validates :name, :location, presence: true
+  validates :name, :location, :price, :description, presence: true
   validates :price, numericality: { greater_than: 0 }
   validates :description, length: { minimum: 25 }
 end

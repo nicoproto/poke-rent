@@ -1,0 +1,12 @@
+<div class="container col-4">
+  <h1 class="text-center">Edit <%= @pokemon.name.capitalize %></h1>
+  <%= simple_form_for(@pokemon) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :location %>
+    <%= f.submit %>
+  <% end %>
+
+  <%= link_to "Back", pokemon_path(@pokemon), class: "btn btn-link"  %>
+</div>
