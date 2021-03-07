@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
-  before_action :set_pokemon, only: [:show, :edit, :update]
+  before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
 
   def index
     @pokemons = Pokemon.all
@@ -33,6 +33,12 @@ class PokemonsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @pokemon.destroy
+
+    redirect_to pokemons_path
   end
 
   private
