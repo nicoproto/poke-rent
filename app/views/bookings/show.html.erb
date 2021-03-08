@@ -1,0 +1,22 @@
+<div class="container col-4">
+  <h1 class="text-center">You successfully booked <%= @booking.pokemon.name.capitalize %>!</h1>
+  <p><strong>Total price: </strong>$<%= @booking.total_price %> / day</p>
+  <p><strong>Booked from: </strong><%= @booking.start_date %></p>
+  <p><strong>To: </strong><%= @booking.end_date %></p>
+
+  <div>
+    <h2><%= @booking.pokemon.name.capitalize %>'s info</h2>
+    <% @booking.pokemon.tag_list.each do |kind| %>
+      <div class="badge badge-primary mb-3">
+        <%= kind %>
+      </div>
+    <% end %>
+    <div>
+      <h4>Description</h4>
+      <p><%= @booking.pokemon.description %></p>
+    </div>
+  </div>
+
+  <h4>Manage</h4>
+  <%= link_to "Delete", booking_path(@booking), method: :delete, data: { confirm: "Are you sure you want to cancel this booking?"} , class: "btn btn-danger"  %>
+</div>
