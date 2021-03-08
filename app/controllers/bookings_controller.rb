@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:show, :destroy]
   def new
     @pokemon = Pokemon.find(params[:pokemon_id])
     @booking = Booking.new
@@ -17,13 +18,21 @@ class BookingsController < ApplicationController
     end
   end
 
-  def show
-    @booking = Booking.find(params[:id])
+  def show; end
+
+  def destroy
+    @booking.destroy
+    # TODO: Redirect to dashboard or booking index when done
+    redirect_to root_path
   end
 
   private
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 end
