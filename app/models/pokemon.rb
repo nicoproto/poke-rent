@@ -1,10 +1,11 @@
 class Pokemon < ApplicationRecord
+  CATEGORIES = %w[electric fire water grass flying poison bug normal ground].freeze
+
   belongs_to :user
+  acts_as_taggable_on :tags
 
   has_many :bookings, dependent: :destroy
   has_many :reviews, through: :bookings
-  has_many :kinds_pokemons
-  has_many :kinds, through: :kinds_pokemons
 
   validates :name, :location, :price, :description, presence: true
   validates :price, numericality: { greater_than: 0 }

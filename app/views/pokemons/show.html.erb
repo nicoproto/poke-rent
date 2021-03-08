@@ -9,9 +9,9 @@
 
   <div>
     <h4>Types</h4>
-    <% @pokemon.kinds.each do |kind| %>
+    <% @pokemon.tag_list.each do |kind| %>
       <div class="badge badge-primary mb-3">
-        <%= kind.name %>
+        <%= kind %>
       </div>
     <% end %>
   </div>

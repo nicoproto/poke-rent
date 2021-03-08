@@ -44,8 +44,7 @@ class PokemonsController < ApplicationController
   private
 
   def pokemon_params
-    # TODO: Add kinds when ready
-    params.require(:pokemon).permit(:name, :description, :price, :location)
+    params.require(:pokemon).permit(:name, :description, :price, :location, tag_list: [])
   end
 
   def set_pokemon
