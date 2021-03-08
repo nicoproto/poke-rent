@@ -32,6 +32,7 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'devise'
+gem 'acts-as-taggable-on', '~> 7.0'
 
 group :development, :test do
   gem 'pry-byebug'

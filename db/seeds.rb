@@ -33,8 +33,6 @@ locations = ['forest', 'lake']
 puts "Deleting database..."
 Review.destroy_all
 Booking.destroy_all
-KindsPokemon.destroy_all
-Kind.destroy_all
 Pokemon.destroy_all
 User.destroy_all
 puts "Done deleting database ✅"
@@ -44,13 +42,6 @@ puts "👥 Creating users "
 ash = User.create!(email: "ash@pokemon.com", password: "password", nickname: "Ash")
 gary = User.create!(email: "gary@pokemon.com", password: "password", nickname: "Gary")
 puts "👥 Done creating users ✅"
-line
-
-puts "🔥 Creating pokemon kinds 💧"
-Kind::CATEGORIES.each do |kind_name|
-  Kind.create!(name: kind_name)
-end
-puts "🔥 Done creating pokemon kinds ✅"
 line
 
 puts "👨‍🔬 Creating new pokemons... 👩‍🔬"
@@ -83,9 +74,7 @@ pokemons.each do |pokemon_name|
   )
 
   pokemon['types'].each do |pokemon_type|
-    kind = Kind.find(name: pokemon_type['type']['name'])
-
-    KindsPokemon.create!(pokemon: new_pokemon, kind: kind)
+    new_pokemon.tag_list.add(pokemon_type['type']['name'])
   end
 
   puts "→ #{new_pokemon.name.capitalize} created! #{EMOJI.sample} - Total actual pokemons: #{Pokemon.count}" if new_pokemon.save!
@@ -117,9 +106,6 @@ Pokemon.all.each do |pokemon|
 end
 
 puts "Total pokemons 🐶: #{Pokemon.count}"
-puts "Kinds created 🔥💦🍃: #{Kind.all.map {|kind| kind.name.capitalize }.join(', ')}"
 puts "Total users 👥: #{User.count}"
 puts "Total bookings 🧾: #{Booking.count}"
 puts "Total reviews 🗣: #{Review.count}"
-
-
