@@ -27,8 +27,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    # TODO: Redirect to dashboard or booking index when done
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 
   private

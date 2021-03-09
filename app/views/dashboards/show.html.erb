@@ -15,6 +15,7 @@
             for <strong>$<%= booking.total_price %></strong>.
           </p>
           <p>Status: <strong><%= booking.status.capitalize %></strong></p>
+          <%= link_to "Cancel", booking_path(booking), method: :delete, class: "badge badge-danger", data: { confirm: "Are you sure you want to delete your booking for #{booking.pokemon.name.capitalize}?"} %>
         </div>
       </div>
     <% end %>
