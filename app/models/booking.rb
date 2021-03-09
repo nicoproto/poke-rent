@@ -10,7 +10,7 @@ class Booking < ApplicationRecord
 
   enum status: [ :pending, :accepted, :declined ]
 
-  def is_cancelable?
+  def is_updatable?
     (start_date - Date.today) > 1
   end
 

@@ -16,7 +16,7 @@
           </p>
           <p>Status: <strong><%= booking.status.capitalize %></strong></p>
 
-          <% if booking.is_cancelable? %>
+          <% if booking.is_updatable? %>
             <%= link_to "Cancel", booking_path(booking), method: :delete, class: "badge badge-danger", data: { confirm: "Are you sure you want to delete your booking for #{booking.pokemon.name.capitalize}?"} %>
           <% end %>
 
@@ -39,8 +39,10 @@
             for <strong>$<%= booking.total_price %></strong>.
           </p>
           <p>Status: <strong><%= booking.status.capitalize %></strong></p>
-          <%= link_to "Accept", booking_path(booking, { status: "accepted"}), method: :patch, class: "badge badge-primary" %>
-          <%= link_to "Decline", booking_path(booking, { status: "declined"}), method: :patch, class: "badge badge-danger" %>
+          <% if booking.is_updatable? %>
+            <%= link_to "Accept", booking_path(booking, { status: "accepted"}), method: :patch, class: "badge badge-primary" %>
+            <%= link_to "Decline", booking_path(booking, { status: "declined"}), method: :patch, class: "badge badge-danger" %>
+          <% end %>
         </div>
       </div>
     <% end %>
