@@ -14,7 +14,7 @@
             <strong>to <%= booking.end_date %></strong>
             for <strong>$<%= booking.total_price %></strong>.
           </p>
-          <p>Product description with <strong>relevant info</strong> only.</p>
+          <p>Status: <strong><%= booking.status.capitalize %></strong></p>
         </div>
       </div>
     <% end %>
@@ -33,7 +33,9 @@
             <strong>to <%= booking.end_date %></strong>
             for <strong>$<%= booking.total_price %></strong>.
           </p>
-          <p>Product description with <strong>relevant info</strong> only.</p>
+          <p>Status: <strong><%= booking.status.capitalize %></strong></p>
+          <%= link_to "Accept", booking_path(booking, { status: "accepted"}), method: :patch, class: "badge badge-primary" %>
+          <%= link_to "Decline", booking_path(booking, { status: "declined"}), method: :patch, class: "badge badge-danger" %>
         </div>
       </div>
     <% end %>

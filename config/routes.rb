@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :pokemons do
     resources :bookings, only: [:new, :create]
   end
-  resources :bookings, only: [:destroy, :show]
+  resources :bookings, only: [:destroy, :show, :update]
   resource :dashboard, only: [:show]
 end
