@@ -53,13 +53,17 @@
     <div class="cards">
       <% current_user.pokemons.each do |pokemon| %>
         <div class="card mx-auto">
-          <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+          <% if pokemon.photo.attached? %>
+            <%= cl_image_tag pokemon.photo.key, class: "card-img-top", alt: pokemon.name %>
+          <% else %>
+            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
             <p class="card-text"><%= pokemon.description %></p>
             <%= link_to "See more", pokemon_path(pokemon), class: "btn btn-primary" %>
             <%= link_to "Edit", edit_pokemon_path(pokemon), class: "btn btn-outline-primary"  %>
-  <%= link_to "Delete", pokemon_path(pokemon), method: :delete, data: { confirm: "Are you sure you want to delete #{pokemon.name.capitalize}?"} , class: "btn btn-danger"  %>
+            <%= link_to "Delete", pokemon_path(pokemon), method: :delete, data: { confirm: "Are you sure you want to delete #{pokemon.name.capitalize}?"} , class: "btn btn-danger"  %>
           </div>
         </div>
       <% end %>

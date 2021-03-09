@@ -27,7 +27,7 @@ random_reviews = [
   },
 ]
 
-pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle']
+pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle', 'pidgey', 'weedle']
 locations = ['forest', 'lake']
 
 puts "Deleting database..."
@@ -40,7 +40,13 @@ puts "Done deleting database ✅"
 line
 puts "👥 Creating users "
 ash = User.create!(email: "ash@pokemon.com", password: "password", nickname: "Ash")
+ash_avatar = URI.open("https://i.pinimg.com/originals/18/d9/e1/18d9e1307018dbc76750ca7d5124fccd.png")
+ash.avatar.attach(io: ash_avatar, filename: "ash_avatar.png", content_type: 'image/png')
+
 gary = User.create!(email: "gary@pokemon.com", password: "password", nickname: "Gary")
+gary_avatar = URI.open("https://static.wikia.nocookie.net/espokemon/images/c/cb/EP620_Gary.png")
+gary.avatar.attach(io: gary_avatar, filename: "gary_avatar.png", content_type: 'image/png')
+
 puts "👥 Done creating users ✅"
 line
 
@@ -78,6 +84,14 @@ pokemons.each do |pokemon_name|
   end
 
   puts "→ #{new_pokemon.name.capitalize} created! #{EMOJI.sample} - Total actual pokemons: #{Pokemon.count}" if new_pokemon.save!
+
+  # Getting pokemon photo and attaching it to pokemon instance
+  pokemon_id = pokemon["id"].to_s.rjust(3, "0")
+
+  pokemon_photo_url = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/#{pokemon_id}.png"
+  pokemon_photo = URI.open(pokemon_photo_url)
+  new_pokemon.photo.attach(io: pokemon_photo, filename: "#{pokemon["species"]["name"]}.png", content_type: 'image/png')
+
   line
   sleep(3)
 end
