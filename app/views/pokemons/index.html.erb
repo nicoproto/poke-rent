@@ -3,7 +3,13 @@
   <div class="cards">
     <% @pokemons.each do |pokemon| %>
       <div class="card mx-auto" style="width: 18rem;">
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+        <% if pokemon.photo.attached? %>
+          <%= cl_image_tag pokemon.photo.key, class: "card-img-top", alt: pokemon.name %>
+        <% else %>
+          <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+        <% end %>
+
+
         <div class="card-body">
           <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
           <p class="card-text"><%= pokemon.description %></p>
