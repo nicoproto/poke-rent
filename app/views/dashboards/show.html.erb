@@ -1,0 +1,68 @@
+<div class="container">
+  <h1 class="text-center">Dashboard</h1>
+
+  <div class="mb-3">
+    <h2>My Bookings</h2>
+    <% @my_bookings.each do |booking| %>
+      <div class="card-product my-2">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <h2><%= booking.pokemon.name.capitalize %></h2>
+          <p>
+            You booked <%= booking.pokemon.name.capitalize %>
+            <strong>from <%= booking.start_date %></strong>
+            <strong>to <%= booking.end_date %></strong>
+            for <strong>$<%= booking.total_price %></strong>.
+          </p>
+          <p>Status: <strong><%= booking.status.capitalize %></strong></p>
+
+          <% if booking.is_updatable? %>
+            <%= link_to "Cancel", booking_path(booking), method: :delete, class: "badge badge-danger", data: { confirm: "Are you sure you want to delete your booking for #{booking.pokemon.name.capitalize}?"} %>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <h2>My Pokemon's bookings</h2>
+    <% @my_pokemons_bookings.each do |booking| %>
+      <div class="card-product my-2">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <h2><%= booking.pokemon.name.capitalize %></h2>
+          <p>
+            You booked <%= booking.pokemon.name.capitalize %>
+            <strong>from <%= booking.start_date %></strong>
+            <strong>to <%= booking.end_date %></strong>
+            for <strong>$<%= booking.total_price %></strong>.
+          </p>
+          <p>Status: <strong><%= booking.status.capitalize %></strong></p>
+          <% if booking.is_updatable? %>
+            <%= link_to "Accept", booking_path(booking, { status: "accepted"}), method: :patch, class: "badge badge-primary" %>
+            <%= link_to "Decline", booking_path(booking, { status: "declined"}), method: :patch, class: "badge badge-danger" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <h2>Manage my pokemons</h2>
+    <div class="cards">
+      <% current_user.pokemons.each do |pokemon| %>
+        <div class="card mx-auto">
+          <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
+            <p class="card-text"><%= pokemon.description %></p>
+            <%= link_to "See more", pokemon_path(pokemon), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_pokemon_path(pokemon), class: "btn btn-outline-primary"  %>
+  <%= link_to "Delete", pokemon_path(pokemon), method: :delete, data: { confirm: "Are you sure you want to delete #{pokemon.name.capitalize}?"} , class: "btn btn-danger"  %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
