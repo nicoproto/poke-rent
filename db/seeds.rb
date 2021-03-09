@@ -27,7 +27,31 @@ random_reviews = [
   },
 ]
 
-pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle']
+pokemon_trainers = [
+  {
+    email: "ash@pokemon.com",
+    nickname: "Ash",
+    avatar: "https://i.pinimg.com/originals/18/d9/e1/18d9e1307018dbc76750ca7d5124fccd.png"
+  },
+  {
+    email: "gary@pokemon.com",
+    nickname: "Gary",
+    avatar: "https://static.wikia.nocookie.net/espokemon/images/c/cb/EP620_Gary.png"
+  },
+  {
+    email: "brock@pokemon.com",
+    nickname: "Brock",
+    avatar: "https://i.pinimg.com/736x/38/22/63/3822638a08740c1236894e6ce34f5059.jpg"
+  },
+  {
+    email: "misty@pokemon.com",
+    nickname: "Misty",
+    avatar: "https://sm.ign.com/ign_latam/screenshot/default/misty-pokemon-hija_bhfp.jpg"
+  },
+
+]
+
+pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle', 'pidgey', 'weedle']
 locations = ['forest', 'lake']
 
 puts "Deleting database..."
@@ -38,9 +62,15 @@ User.destroy_all
 puts "Done deleting database ✅"
 
 line
-puts "👥 Creating users "
-ash = User.create!(email: "ash@pokemon.com", password: "password", nickname: "Ash")
-gary = User.create!(email: "gary@pokemon.com", password: "password", nickname: "Gary")
+puts "👥 Creating trainers "
+
+pokemon_trainers.each do |trainer|
+  new_trainer = User.create!(email: trainer[:email], password: "password", nickname: trainer[:nickname])
+  new_trainer_avatar = URI.open(trainer[:avatar])
+  new_trainer.avatar.attach(io: new_trainer_avatar, filename: "#{new_trainer.nickname}_avatar.png", content_type: 'image/png')
+  puts "Pokemon trainer #{new_trainer.nickname.capitalize} ready to battle 🙌🏻"
+end
+
 puts "👥 Done creating users ✅"
 line
 
@@ -78,6 +108,14 @@ pokemons.each do |pokemon_name|
   end
 
   puts "→ #{new_pokemon.name.capitalize} created! #{EMOJI.sample} - Total actual pokemons: #{Pokemon.count}" if new_pokemon.save!
+
+  # Getting pokemon photo and attaching it to pokemon instance
+  pokemon_id = pokemon["id"].to_s.rjust(3, "0")
+
+  pokemon_photo_url = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/#{pokemon_id}.png"
+  pokemon_photo = URI.open(pokemon_photo_url)
+  new_pokemon.photo.attach(io: pokemon_photo, filename: "#{pokemon["species"]["name"]}.png", content_type: 'image/png')
+
   line
   sleep(3)
 end

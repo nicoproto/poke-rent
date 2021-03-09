@@ -7,6 +7,12 @@
     <p><%= @pokemon.description %></p>
   </div>
 
+  <% if @pokemon.photo.attached? %>
+    <%= cl_image_tag @pokemon.photo.key, alt: @pokemon.name %>
+  <% else %>
+    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+  <% end %>
+
   <div>
     <h4>Types</h4>
     <% @pokemon.tag_list.each do |kind| %>

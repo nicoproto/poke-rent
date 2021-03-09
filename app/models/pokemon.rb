@@ -3,6 +3,7 @@ class Pokemon < ApplicationRecord
 
   belongs_to :user
   acts_as_taggable_on :tags
+  has_one_attached :photo
 
   has_many :bookings, dependent: :destroy
   has_many :reviews, through: :bookings

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :pokemons, dependent: :destroy
   has_many :bookings
+  has_one_attached :avatar
 
   validates :nickname, presence: true, uniqueness: true
 end
