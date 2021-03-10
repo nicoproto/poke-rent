@@ -51,8 +51,16 @@ pokemon_trainers = [
 
 ]
 
+locations = [
+  "Travessera de Gràcia, 47-49, 08021 Barcelona",
+  "Carrer de Vallseca, 28, 08024 Barcelona",
+  "Carrer de Joaquín Costa, 26, 08001 Barcelona",
+  "Carrer del Dr. Trueta, 196, 08005 Barcelona",
+  "Carrer dels Àngels, 6, 08001 Barcelona",
+  "Passeig de Joan de Borbó, 9, 08003 Barcelona",
+]
+
 pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle', 'pidgey', 'weedle']
-locations = ['forest', 'lake']
 
 puts "Deleting database..."
 Review.destroy_all
@@ -74,6 +82,8 @@ end
 puts "👥 Done creating users ✅"
 line
 
+location_index = 0
+
 puts "👨‍🔬 Creating new pokemons... 👩‍🔬"
 pokemons.each do |pokemon_name|
   # Getting pokemon name and type
@@ -94,14 +104,18 @@ pokemons.each do |pokemon_name|
 
   pokemon_description = html_doc.search('.version-x.active')[0].text.strip
 
+  puts "location_index: #{location_index}"
+  puts "location: #{locations[location_index]}"
   # Creating new pokemon object
   new_pokemon = Pokemon.new(
     name: pokemon['species']['name'],
     description: pokemon_description,
     price: (rand(45..250)),
-    location: locations.sample,
+    location: locations[location_index],
     user: User.all.sample
   )
+
+  location_index += 1
 
   pokemon['types'].each do |pokemon_type|
     new_pokemon.tag_list.add(pokemon_type['type']['name'])
