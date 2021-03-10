@@ -1,0 +1,23 @@
+pokemon_trainers:
+  [
+  {
+    email: "ash@pokemon.com",
+    nickname: "Ash",
+    avatar: "https://i.pinimg.com/originals/18/d9/e1/18d9e1307018dbc76750ca7d5124fccd.png"
+  }
+  {
+    email: "gary@pokemon.com",
+    nickname: "Gary",
+    avatar: "https://static.wikia.nocookie.net/espokemon/images/c/cb/EP620_Gary.png"
+  }
+  {
+    email: "brock@pokemon.com",
+    nickname: "Brock",
+    avatar: "https://i.pinimg.com/736x/38/22/63/3822638a08740c1236894e6ce34f5059.jpg"
+  }
+  {
+    email: "misty@pokemon.com",
+    nickname: "Misty",
+    avatar: "https://sm.ign.com/ign_latam/screenshot/default/misty-pokemon-hija_bhfp.jpg"
+  }
+  ]

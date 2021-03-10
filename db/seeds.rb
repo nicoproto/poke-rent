@@ -58,9 +58,24 @@ locations = [
   "Carrer del Dr. Trueta, 196, 08005 Barcelona",
   "Carrer dels Àngels, 6, 08001 Barcelona",
   "Passeig de Joan de Borbó, 9, 08003 Barcelona",
+  "Carrer de Roc Boronat, 138, 08018 Barcelona",
+  "Passeig de Gràcia, 92, 08008 Barcelona",
+  "Moll de Sant Beltran s/n C.P, Moll de Sant Bertran, 08039 Barcelona",
+  "Moll de Sant Bertran, 4, 08039 Barcelona",
+  "Plaça del Mar, 1, 08002 Barcelona",
+  "Carrer d'Ulldecona, 35, 08038 Barcelona"
 ]
 
-pokemons = ['pikachu', 'charmander', 'bulbasaur', 'squirtle', 'pidgey', 'weedle']
+puts "🕵️‍♂️ Getting pokemon's names from Yaml file"
+file_path = Rails.root.join("db", "seed_pokemons.yml")
+seed_file = YAML::load_file(file_path)
+
+pokemons = []
+seed_file['pokemons'].each_with_index do |pokemon, index|
+  pokemons << pokemon.downcase.gsub(" ", "-")
+end
+
+puts "Pokemon's names filled ✅"
 
 puts "Deleting database..."
 Review.destroy_all
