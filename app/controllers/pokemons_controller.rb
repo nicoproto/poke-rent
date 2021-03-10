@@ -8,7 +8,9 @@ class PokemonsController < ApplicationController
     @markers = @pokemons.geocoded.map do |pokemon|
       {
         lat: pokemon.latitude,
-        lng: pokemon.longitude
+        lng: pokemon.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { pokemon: pokemon }),
+        image_url: 'https://res.cloudinary.com/nico1711/image/upload/v1615373168/pokeball.webp'
       }
     end
   end
