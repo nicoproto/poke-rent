@@ -10,7 +10,7 @@
   <% if @pokemon.photo.attached? %>
     <%= cl_image_tag @pokemon.photo.key, alt: @pokemon.name %>
   <% else %>
-    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" class="card-img-top" alt="<%= pokemon.name %>">
+    <img src="<%= Pokemon::DEFAULT_IMG %>" class="card-img-top" alt="Pokemon">
   <% end %>
 
   <div>
