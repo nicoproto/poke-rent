@@ -14,6 +14,14 @@ class Booking < ApplicationRecord
     (start_date - Date.today) > 0
   end
 
+  def is_reviewable?
+    (Date.today > end_date) && !reviewed?
+  end
+
+  def reviewed?
+    !self.review.nil?
+  end
+
   private
 
   def duration
