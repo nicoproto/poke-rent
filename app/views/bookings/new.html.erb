@@ -1,8 +1,14 @@
 <div class="container col-4">
   <h1 class="text-center">Booking for <%= @pokemon.name.capitalize %></h1>
   <%= simple_form_for [@pokemon, @booking] do |f| %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+    <div class="row">
+      <div class="col-6">
+        <%= f.input :start_date, as: :string, required: false, label: false, input_html: {class: "datepicker", placeholder: "Start date..."} %>
+      </div>
+      <div class="col-6">
+        <%= f.input :end_date, as: :string, required: false, label: false, input_html: {class: "datepicker", placeholder: "End date..."} %>
+      </div>
+    </div>
     <%= f.submit %>
   <% end %>
 

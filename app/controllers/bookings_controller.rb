@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy, :update]
   def new
     @pokemon = Pokemon.find(params[:pokemon_id])
-    @booking = Booking.new
+    @booking = Booking.new(start_date: params[:start_date], end_date: params[:end_date])
   end
 
   def create
