@@ -30,7 +30,7 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initFlatpickr } from '../plugins/init_flatpickr';
 import { initStarRating } from '../plugins/init_star_rating';
-
+import { initPreviewImageOnFileSelect } from '../plugins/init_photo_preview';
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -39,4 +39,5 @@ document.addEventListener('turbolinks:load', () => {
   initAutocomplete();
   initFlatpickr();
   initStarRating();
+  initPreviewImageOnFileSelect();
 });
