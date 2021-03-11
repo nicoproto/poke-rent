@@ -1,7 +1,7 @@
 <h1>Review your booking</h1>
 <p>You battled with <%= @booking.pokemon.name.capitalize %> from <%= @booking.start_date %> to <%= @booking.end_date %>, please tell use about your experience.</p>
 <%= simple_form_for [@booking, @review] do |f| %>
-  <%= f.input :rating %>
+  <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
   <%= f.input :content %>
   <%= f.submit %>
 <% end %>
