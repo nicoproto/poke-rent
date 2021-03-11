@@ -1,11 +1,15 @@
 class PokemonsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pokemons = Pokemon.all
+    if params[:query].present?
+      @pokemons = Pokemon.search_by_name_description_and_trainer(params[:query]).geocoded
+    else
+      @pokemons = Pokemon.geocoded
+    end
 
-    @markers = @pokemons.geocoded.map do |pokemon|
+    @markers = @pokemons.map do |pokemon|
       {
         lat: pokemon.latitude,
         lng: pokemon.longitude,
