@@ -1,9 +1,9 @@
-<div class="container col-6">
+<div class="container col-4">
   <h1>Edit your review</h1>
   <p>You battled with <%= @review.booking.pokemon.name.capitalize %> from <%= @review.booking.start_date %> to <%= @review.booking.end_date %>, please tell use about your experience.</p>
   <%= simple_form_for @review do |f| %>
-    <%= f.input :rating %>
+    <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
     <%= f.input :content %>
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
 </div>
