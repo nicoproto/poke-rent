@@ -1,5 +1,6 @@
 class Pokemon < ApplicationRecord
   CATEGORIES = %w[electric fire water grass flying poison bug normal ground].freeze
+  DEFAULT_IMG = "https://res.cloudinary.com/nico1711/image/upload/v1615475855/pikachu_default.png"
 
   include PgSearch::Model
 
@@ -25,7 +26,6 @@ class Pokemon < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
-
 
   def short_description
     description[0..85].gsub(/\s\w+\s*$/,'...')
