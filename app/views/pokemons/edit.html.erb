@@ -1,13 +1,35 @@
-<div class="container col-4">
-  <h1 class="text-center">Edit <%= @pokemon.name.capitalize %></h1>
-  <%= simple_form_for(@pokemon) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :price %>
-    <%= f.input :location %>
-    <%= f.input :tag_list, as: :check_boxes, collection: Pokemon::CATEGORIES %>
-    <%= f.submit %>
-  <% end %>
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="text-center">Edit <%= @pokemon.name.capitalize %></h1>
+      <%= simple_form_for(@pokemon) do |f| %>
+        <div class="row">
+          <div class="col-6">
+            <%= f.input :name %>
+          </div>
+          <div class="col-6">
+            <%= f.input :price %>
+          </div>
+        </div>
 
-  <%= link_to "Back", pokemon_path(@pokemon), class: "btn btn-link"  %>
+        <%= f.input :description %>
+        <%= f.input :location %>
+
+        <%= f.input :tag_list,
+            as: :check_boxes,
+            collection: Pokemon::CATEGORIES,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'} %>
+        <%= f.submit "Create my Pokemon", class: "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-6 d-flex align-items-center justify-content-center text-center">
+      <div>
+        <%= cl_image_tag @pokemon.photo.key, width: 300, id: "photo-preview" %>
+        <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+      </div>
+    </div>
+      <% end %>
+  </div>
 </div>
