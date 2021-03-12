@@ -30,4 +30,8 @@ class Pokemon < ApplicationRecord
   def short_description
     description[0..85].gsub(/\s\w+\s*$/,'...')
   end
+
+  def all_types
+    self.tag_list.map{ |kind| kind.capitalize }.join(", ")
+  end
 end

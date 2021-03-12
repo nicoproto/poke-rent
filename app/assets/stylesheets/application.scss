@@ -14,3 +14,12 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+body {
+  background-image: url('https://res.cloudinary.com/nico1711/image/upload/v1615558151/pokemon_background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center bottom;
+}
