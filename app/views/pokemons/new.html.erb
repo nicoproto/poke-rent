@@ -1,11 +1,19 @@
-<div class="container">
+<div class="container mb-5">
   <div class="row">
     <div class="col-6">
       <h1 class="text-center">Add your Pokemon</h1>
       <%= simple_form_for(@pokemon) do |f| %>
-        <%= f.input :name %>
+        <div class="row">
+          <div class="col-6">
+            <%= f.input :name %>
+          </div>
+          <div class="col-6">
+            <%= f.input :price %>
+          </div>
+        </div>
+
+
         <%= f.input :description %>
-        <%= f.input :price %>
         <%= f.input :location %>
         <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
 
@@ -16,7 +24,7 @@
             collection_wrapper_class: 'category-wrapper',
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'} %>
-        <%= f.submit %>
+        <%= f.submit "Create my Pokemon", class: "btn btn-primary btn-block" %>
       <% end %>
     </div>
     <div class="col-6 d-flex align-items-center justify-content-center">
