@@ -6,3 +6,17 @@
   background: white;
   border-radius: 2px;
 }
+
+#photo-preview {
+  height: 50vh;
+  width: 50vw;
+  object-fit: contain;
+  border-radius: 6px;
+
+  &.active {
+    background-color: white;
+    border: solid 3px red;
+  }
+}
+
+

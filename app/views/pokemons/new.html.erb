@@ -1,19 +1,26 @@
-<div class="container col-4">
-  <h1 class="text-center">Add your Pokemon</h1>
-  <%= simple_form_for(@pokemon) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :price %>
-    <%= f.input :location %>
-    <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
-    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
-    <%= f.input :tag_list,
-        as: :check_boxes,
-        collection: Pokemon::CATEGORIES,
-        collection_wrapper_tag: 'div',
-        collection_wrapper_class: 'category-wrapper',
-        item_wrapper_class: 'category-item',
-        input_html: {class: 'category-selector'} %>
-    <%= f.submit %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="text-center">Add your Pokemon</h1>
+      <%= simple_form_for(@pokemon) do |f| %>
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :price %>
+        <%= f.input :location %>
+        <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+
+        <%= f.input :tag_list,
+            as: :check_boxes,
+            collection: Pokemon::CATEGORIES,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'} %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+    <div class="col-6 d-flex align-items-center justify-content-center">
+      <%= cl_image_tag "pikachu_default", width: 300, id: "photo-preview" %>
+    </div>
+  </div>
 </div>
