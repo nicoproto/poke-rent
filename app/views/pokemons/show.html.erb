@@ -1,47 +1,112 @@
-<div class="container col-4">
-  <h1 class="text-center"><%= @pokemon.name.capitalize %></h1>
-  <p><strong>Price: </strong>$<%= @pokemon.price %> / day</p>
-  <p><strong>Location: </strong><%= @pokemon.location %></p>
-  <div>
-    <h4>Description</h4>
-    <p><%= @pokemon.description %></p>
-  </div>
+<div class="pokedex-main">
 
-  <% if @pokemon.photo.attached? %>
-    <%= cl_image_tag @pokemon.photo.key, alt: @pokemon.name %>
-  <% else %>
-    <img src="<%= Pokemon::DEFAULT_IMG %>" class="card-img-top" alt="Pokemon">
-  <% end %>
-
-  <div>
-    <h4>Types</h4>
-    <% @pokemon.tag_list.each do |kind| %>
-      <div class="badge badge-primary mb-3">
-        <%= kind %>
+  <div class="pokedex-container">
+    <div class="left-screen">
+      <div class="left-screen__top">
+        <div class="light-container">
+          <div class="light light--blue">
+          </div>
+        </div>
+        <div class="light light--red"></div>
+        <div class="light light--yellow"></div>
+        <div class="light light--green"></div>
       </div>
-    <% end %>
-  </div>
-
-  <h4>Reviews</h4>
-  <% @pokemon.reviews.each do |review| %>
-    <div>
-      <p><%= review.rating %> stars - <%= review.content %></p>
-      <p class="w-100 text-right"><strong>- <%= review.user.nickname.capitalize %></strong></p>
+      <div class="left-screen__bottom">
+        <div class="main-screen">
+          <div class="main-screen__top-lights">
+          </div>
+          <div id="display" class="main-screen__display">
+            <div class="pokemon-image" style="background-image: url(<%= cl_image_path (@pokemon.photo.attached? ? @pokemon.photo.key : Pokemon::DEFAULT_IMG) %>)">
+            </div>
+            <div class="search-message">Searching...</div>
+            <div class="not-found-message">Pokemon <br>Not Found</div>
+          </div>
+          <div class="main-screen__speaker-light"></div>
+          <div class="main-screen__speaker">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="left-screen__joint">
+        <div class="joint"></div>
+        <div class="joint"></div>
+        <div class="joint"></div>
+        <div class="joint"></div>
+        <div class="joint__reflextion"></div>
+      </div>
     </div>
-  <% end %>
+    <div class="right-screen">
+      <div class="right-screen__top">
+        <div></div>
+      </div>
+      <div class="right-screen__bottom">
+        <div class="info-container">
+          <section class="info-screen">
+            <div id="species" class="info">
+              <div class="label">Name:</div>
+              <div class="desc pl-0"><%= @pokemon.name.capitalize %></div>
+            </div>
 
-  <div>
-    <h4>Book</h4>
-    <form class="form-group" action="<%= new_pokemon_booking_path(@pokemon) %>" >
-      <input type="string" name="start_date" class="datepicker form-control" placeholder="<%= Date.today.strftime("%d/%m/%y") %>">
-      <input type="string" name="end_date" class="datepicker form-control" placeholder="<%= (Date.today + 1).strftime("%d/%m/%y") %>">
-      <input type="submit" value="Book" class="btn btn-primary">
-    </form>
+            <div id="type" class="info">
+              <div class="label">Price:</div>
+              <div class="desc">$<%= @pokemon.price %> /day</div>
+            </div>
+            <div id="height" class="info">
+              <div class="label">Types:</div>
+              <div class="desc"><%= @pokemon.all_types %></div>
+            </div>
+            <div id="weight" class="info">
+              <div class="label">Weight:</div>
+              <div class="desc">1.20mts</div>
+            </div>
+            <div id="evolution" class="info">
+              <div class="label">Location:</div>
+              <div class="desc"><%= @pokemon.location %></div>
+            </div>
+            <div id="bio" class="info">
+              <div class="label">Biology:</div>
+              <div class="desc"><%= @pokemon.description %></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h4>Reviews</h4>
+      <% @pokemon.reviews.each do |review| %>
+        <div>
+          <p><%= review.rating %> stars - <%= review.content %></p>
+          <p class="w-100 text-right"><strong>- <%= review.user.nickname.capitalize %></strong></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <div>
+        <h4>Book</h4>
+        <form class="form-group" action="<%= new_pokemon_booking_path(@pokemon) %>" >
+          <input type="string" name="start_date" class="datepicker form-control" placeholder="<%= Date.today.strftime("%d/%m/%y") %>">
+          <input type="string" name="end_date" class="datepicker form-control" placeholder="<%= (Date.today + 1).strftime("%d/%m/%y") %>">
+          <input type="submit" value="Book" class="btn btn-primary">
+        </form>
+      </div>
+
+      <h4>Manage</h4>
+      <%= link_to "Book", new_pokemon_booking_path(@pokemon), class: "btn btn-primary"  %>
+      <%= link_to "Edit", edit_pokemon_path(@pokemon), class: "btn btn-outline-primary"  %>
+      <%= link_to "Delete", pokemon_path(@pokemon), method: :delete, data: { confirm: "Are you sure you want to delete #{@pokemon.name.capitalize}?"} , class: "btn btn-danger"  %>
+      <%= link_to "Back", pokemons_path, class: "btn btn-link"  %>
+    </div>
   </div>
 
-  <h4>Manage</h4>
-  <%= link_to "Book", new_pokemon_booking_path(@pokemon), class: "btn btn-primary"  %>
-  <%= link_to "Edit", edit_pokemon_path(@pokemon), class: "btn btn-outline-primary"  %>
-  <%= link_to "Delete", pokemon_path(@pokemon), method: :delete, data: { confirm: "Are you sure you want to delete #{@pokemon.name.capitalize}?"} , class: "btn btn-danger"  %>
-  <%= link_to "Back", pokemons_path, class: "btn btn-link"  %>
+
+
 </div>
+
