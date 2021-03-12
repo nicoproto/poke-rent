@@ -7,7 +7,13 @@
     <%= f.input :location %>
     <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
     <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
-    <%= f.input :tag_list, as: :check_boxes, collection: Pokemon::CATEGORIES %>
+    <%= f.input :tag_list,
+        as: :check_boxes,
+        collection: Pokemon::CATEGORIES,
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'category-wrapper',
+        item_wrapper_class: 'category-item',
+        input_html: {class: 'category-selector'} %>
     <%= f.submit %>
   <% end %>
 </div>
