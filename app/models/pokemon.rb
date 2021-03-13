@@ -34,4 +34,8 @@ class Pokemon < ApplicationRecord
   def all_types
     self.tag_list.map{ |kind| kind.capitalize }.join(", ")
   end
+
+  def main_type
+    self.tag_list.first
+  end
 end
