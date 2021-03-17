@@ -15,6 +15,8 @@ EMOJI = ["👍", "👌", "🤙", "💪", "🙌", "👏", "🦾"].freeze
 # ---------- STARTING SEEDING ----------
 
 puts "🧹Cleaning up the database"
+Message.destroy_all
+Chatroom.destroy_all
 Review.destroy_all
 Booking.destroy_all
 Pokemon.destroy_all
@@ -143,4 +145,5 @@ end
 puts "Total pokemons 🐶: #{Pokemon.count}"
 puts "Total users 👥: #{User.count}"
 puts "Total bookings 🧾: #{Booking.count}"
+puts "Total chatroom 🧾: #{Chatroom.count}"
 puts "Total reviews 🗣: #{Review.count}"

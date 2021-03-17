@@ -1,5 +1,5 @@
 <div class="container col-4">
-  <h1 class="text-center">Booking for <%= @pokemon.name.capitalize %></h1>
+  <h1 class="text-center">Booking details for <%= @pokemon.name.capitalize %></h1>
   <%= simple_form_for [@pokemon, @booking] do |f| %>
     <div class="row">
       <div class="col-6">
@@ -9,7 +9,7 @@
         <%= f.input :end_date, as: :string, required: false, label: false, input_html: {class: "datepicker", placeholder: "End date..."} %>
       </div>
     </div>
-    <%= f.submit "Book #{@pokemon.name.capitalize}", class: "btn btn-primary" %>
+    <%= f.submit "Confirm booking for #{@pokemon.name.capitalize}", class: "btn btn-primary" %>
   <% end %>
 
   <%= link_to "Back", pokemon_path(@pokemon), class: "btn btn-link"  %>

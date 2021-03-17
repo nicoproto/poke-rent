@@ -1,9 +1,11 @@
 class Booking < ApplicationRecord
   before_create :set_total_price
+  after_create :create_chatroom
 
   belongs_to :pokemon
   belongs_to :user
   has_one :review, dependent: :destroy
+  has_one :chatroom
 
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date
@@ -38,5 +40,9 @@ class Booking < ApplicationRecord
     if end_date < start_date
       errors.add(:end_date, 'End date must not be before start date')
     end
+  end
+
+  def create_chatroom
+    Chatroom.create(booking: self)
   end
 end

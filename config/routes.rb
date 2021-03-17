@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   end
   resource :dashboard, only: [:show]
   resources :reviews, only: [:edit, :update]
+
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 end

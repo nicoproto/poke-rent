@@ -1,0 +1,22 @@
+.chatbox {
+  min-height: calc(100vh - 66px);
+  position: relative;
+
+  form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    .form-group {
+      width: 100%;
+    }
+
+    .send-btn {
+      background: none;
+      border: none;
+      position: absolute;
+      right: 0;
+      font-size: 1.5rem;
+    }
+  }
+}
