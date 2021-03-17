@@ -1,14 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= link_to "See all pokemons", pokemons_path, class: "btn btn-primary"  %>
+<div class="container banner">
+  <%= cl_image_tag "pokemon_logo" %>
 
-<div class="col-6">
-  <%= form_tag pokemons_path, method: :get, class: "d-flex" do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control",
-      placeholder: "Find by pokemon"
-    %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
-  <% end %>
+  <div class="col-6 mx-auto">
+    <%= form_tag pokemons_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find by pokemon name or trainer"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+
+    <%= link_to "or see them all", pokemons_path, class: "d-block text-center mt-3" %>
+  </div>
 </div>

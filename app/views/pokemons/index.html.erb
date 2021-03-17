@@ -22,19 +22,20 @@
   <div class="map-layout">
     <div class="cards px-3">
       <% @pokemons.each do |pokemon| %>
-        <div class="card-trip mx-auto">
+        <div class="card-trip mx-auto <%= pokemon.main_type %>">
           <%= link_to pokemon_path(pokemon) do %>
-            <% if pokemon.photo.attached? %>
-              <%= cl_image_tag pokemon.photo.key, alt: pokemon.name %>
-            <% else %>
-              <img src="<%= Pokemon::DEFAULT_IMG %>" alt="Pokemon">
-            <% end %>
+            <div class="img-container">
+              <% if pokemon.photo.attached? %>
+                <%= cl_image_tag pokemon.photo.key, alt: pokemon.name %>
+              <% else %>
+                <img src="<%= Pokemon::DEFAULT_IMG %>" alt="Pokemon">
+              <% end %>
+            </div>
           <% end %>
 
           <div class="card-trip-infos">
             <div>
               <h2><%= pokemon.name.capitalize %></h2>
-              <p><%= pokemon.short_description %></p>
             </div>
             <h2 class="card-trip-pricing">£<%= pokemon.price %></h2>
             <%= cl_image_tag pokemon.user.avatar.key, alt: pokemon.user.nickname, class: "card-trip-user avatar-bordered" %>
@@ -44,7 +45,7 @@
     </div>
 
     <div id="map"
-      style="width: 100%; height: 100vh;"
+      style="width: 45vw; height: 100vh;"
       data-markers="<%= @markers.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
