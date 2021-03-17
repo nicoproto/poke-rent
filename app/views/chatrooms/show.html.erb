@@ -1,11 +1,14 @@
+<h1 class="text-center">Chat</h1>
 <div class="col-8 mx-auto chatbox">
-  <h1>Chat</h1>
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.each do |message| %>
       <%= render "messages/message", message: message, user_is_messages_author: message.user == current_user %>
     <% end %>
   </div>
-  <%= simple_form_for [ @chatroom, @message ], html: { class: "d-flex"} do |f| %>
+</div>
+
+<div class="col-8 mx-auto">
+  <%= simple_form_for [ @chatroom, @message ], html: { class: "d-flex chatform"} do |f| %>
     <%= f.input :content, label: false, placeholder: "Write your text here..." %>
     <%= button_tag type: 'submit', class: "send-btn" do %>
       <i class="fab fa-telegram-plane"></i>
