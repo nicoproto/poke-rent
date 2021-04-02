@@ -24,6 +24,10 @@ class Booking < ApplicationRecord
     !self.review.nil?
   end
 
+  def notification_to_s
+    "you a booking request"
+  end
+
   private
 
   def duration
