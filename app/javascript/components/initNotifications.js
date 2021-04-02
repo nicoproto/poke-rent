@@ -2,11 +2,11 @@ import Rails from '@rails/ujs'
 
 const initNotifications = () => {
   const notifications = document.getElementById('notifications');
-  const counter = document.getElementById('counter');
+  const counter = document.querySelector('[data-trigger="updateCounter"]');
 
-  console.log("initNotifications runned");
 
   const markAsRead = () => {
+    console.log("markAsRead runned");
     fetch('/notifications/mark_as_read', {
         method: 'post',
         headers: {
