@@ -6,8 +6,11 @@ const initNotificationCable = () => {
     consumer.subscriptions.create({
           channel: "NotificationsChannel"
         }, {
+      // called when data is broadcast in the cable
       received(data) {
-        console.log(data); // called when data is broadcast in the cable
+        notificationsContainer.insertAdjacentHTML('beforeend', data.notification);
+        const counterElement = document.getElementById('counter');
+        counterElement.innerHTML = data.count;
       },
     });
   }

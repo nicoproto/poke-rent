@@ -4,9 +4,12 @@ const initNotifications = () => {
   const notifications = document.getElementById('notifications');
   const counter = document.querySelector('[data-trigger="updateCounter"]');
 
+  const refreshCounter = (number) => {
+    const counterElement = document.getElementById('counter');
+    counterElement.innerHTML = number;
+  };
 
   const markAsRead = () => {
-    console.log("markAsRead runned");
     fetch('/notifications/mark_as_read', {
         method: 'post',
         headers: {
@@ -22,6 +25,11 @@ const initNotifications = () => {
       })
   };
 
+  const refreshNotifications = (notificationsHTML) => {
+    const notifications = document.getElementById('notifications');
+    notifications.innerHTML = notificationsHTML;
+  };
+
   const renderNotifications = (notifications) => {
     return notifications.map(notification => {
       return (
@@ -31,16 +39,6 @@ const initNotifications = () => {
           </div>`
       )
     }).join('');
-  };
-
-  const refreshNotifications = (notificationsHTML) => {
-    const notifications = document.getElementById('notifications');
-    notifications.innerHTML = notificationsHTML;
-  };
-
-  const refreshCounter = (number) => {
-    const counterElement = document.getElementById('counter');
-    counterElement.innerHTML = number;
   };
 
   const loadNotifications = () => {
@@ -59,16 +57,8 @@ const initNotifications = () => {
       })
   };
 
-  if (notifications) {
-    loadNotifications();
-    setInterval(() => {
-      loadNotifications();
-    }, 5000);
-  }
-
-  if (counter) {
-    counter.addEventListener('click', markAsRead)
-  }
+  if (notifications) loadNotifications();
+  if (counter) counter.addEventListener('click', markAsRead);
 }
 
 export { initNotifications };
