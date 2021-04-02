@@ -6,6 +6,7 @@ class Booking < ApplicationRecord
   belongs_to :user
   has_one :review, dependent: :destroy
   has_one :chatroom
+  has_one :notification, foreign_key: :notifiable_id, dependent: :destroy
 
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date
