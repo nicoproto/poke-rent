@@ -1,7 +1,6 @@
 import Rails from '@rails/ujs'
 
 const initNotifications = () => {
-  const notifications = document.getElementById('notifications');
   const counter = document.querySelector('[data-trigger="updateCounter"]');
 
   const refreshCounter = (number) => {
@@ -25,39 +24,6 @@ const initNotifications = () => {
       })
   };
 
-  const refreshNotifications = (notificationsHTML) => {
-    const notifications = document.getElementById('notifications');
-    notifications.innerHTML = notificationsHTML;
-  };
-
-  const renderNotifications = (notifications) => {
-    return notifications.map(notification => {
-      return (
-        `<div class="dropdown-item">
-            <strong>${notification.actor}</strong>
-            ${notification.action} ${notification.notifiable.type}
-          </div>`
-      )
-    }).join('');
-  };
-
-  const loadNotifications = () => {
-    fetch('/notifications', {
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': Rails.csrfToken()
-        },
-        credentials: 'same-origin'
-      })
-      .then(response => response.json())
-      .then(data => {
-        refreshCounter(data.array.length);
-        refreshNotifications(renderNotifications(data.array));
-      })
-  };
-
-  if (notifications) loadNotifications();
   if (counter) counter.addEventListener('click', markAsRead);
 }
 
