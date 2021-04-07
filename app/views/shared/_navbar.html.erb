@@ -16,7 +16,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-trigger="updateCounter">
-            <span id="counter" class="badge badge-danger ml-2"></span>
+            <span id="counter" class="badge badge-danger ml-2"><%= current_user.notifications.unread.count %></span>
             <i class="fas fa-bell"></i>
           </a>
           <div id="notifications" class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">

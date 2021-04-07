@@ -12,15 +12,13 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
+      # TODO: Move to booking
       notification = Notification.create(
         recipient: @pokemon.user,
         actor: current_user,
         action: 'sent',
         notifiable: @booking
       )
-
-      html = ApplicationController.render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", locals: {notification: notification}, formats: [:html]
-      ActionCable.server.broadcast "notifications:#{notification.recipient_id}", notification: html, count: @pokemon.user.notifications.unread.count
 
       redirect_to booking_path(@booking)
     else
