@@ -12,14 +12,6 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
-      # TODO: Move to booking
-      notification = Notification.create(
-        recipient: @pokemon.user,
-        actor: current_user,
-        action: 'sent',
-        notifiable: @booking
-      )
-
       redirect_to booking_path(@booking)
     else
       render :new
