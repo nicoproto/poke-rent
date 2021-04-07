@@ -57,7 +57,7 @@ end
 puts "Seeding information retrieved ✅"
 
 puts "👥 Creating trainers "
-
+# TODO: Add admin to one user here
 trainers.each do |trainer|
   new_trainer = User.create!(email: trainer["email"], password: "password", nickname: trainer["nickname"])
   new_trainer_avatar = URI.open(trainer["avatar"])

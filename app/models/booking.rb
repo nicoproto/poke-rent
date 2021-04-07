@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   before_create :set_total_price
   after_create :create_chatroom
+  after_create :create_notification
 
   belongs_to :pokemon
   belongs_to :user
@@ -49,5 +50,14 @@ class Booking < ApplicationRecord
 
   def create_chatroom
     Chatroom.create(booking: self)
+  end
+
+  def create_notification
+    Notification.create(
+      recipient: pokemon.user,
+      actor: user,
+      action: 'sent',
+      notifiable: self
+    )
   end
 end
