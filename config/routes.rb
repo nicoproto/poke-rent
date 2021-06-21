@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [:destroy, :show, :update] do
     resources :reviews, only: [:new, :create]
+    resources :payments, only: :new
   end
   resource :dashboard, only: [:show]
   resources :reviews, only: [:edit, :update]
