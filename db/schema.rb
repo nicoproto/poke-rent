@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_205012) do
+ActiveRecord::Schema.define(version: 2021_06_21_210153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,18 @@ ActiveRecord::Schema.define(version: 2021_06_21_205012) do
     t.string "notifiable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id", null: false
+    t.bigint "pokemon_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_orders_on_pokemon_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "pokemons", force: :cascade do |t|
@@ -145,6 +157,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_205012) do
   add_foreign_key "bookings", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "pokemons"
+  add_foreign_key "orders", "users"
   add_foreign_key "pokemons", "users"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "taggings", "tags"
