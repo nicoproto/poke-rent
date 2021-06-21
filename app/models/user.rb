@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :bookings
   has_one_attached :avatar
   has_many :notifications, foreign_key: :recipient_id
-  has_many :orders
 
   validates :nickname, presence: true, uniqueness: true
 end

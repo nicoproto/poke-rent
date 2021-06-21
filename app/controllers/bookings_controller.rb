@@ -12,10 +12,31 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
-      redirect_to booking_path(@booking)
+      # redirect_to booking_path(@booking)
+
+      session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        name: "#{@pokemon.id}_#{@pokemon_name}_#{current_user.id}",
+        images: [cl_image_path @pokemon.photo.key],
+        amount: @pokemon.price_cents,
+        currency: 'eur',
+        quantity: 1
+      }],
+      success_url: booking_url(@booking),
+      cancel_url: booking_url(@booking)
+    )
+
+    @booking.update(checkout_session_id: session.id)
+    redirect_to new_booking_payment_path(@booking)
     else
       render :new
     end
+
+
+
+
+
   end
 
   def update
