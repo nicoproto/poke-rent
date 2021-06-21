@@ -14,7 +14,7 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date
 
-  enum status: [ :pending, :accepted, :declined ]
+  enum status: [ :pending, :accepted, :declined, :paid ]
 
   def is_updatable?
     (start_date - Date.today) > 0
