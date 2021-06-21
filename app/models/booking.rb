@@ -1,4 +1,6 @@
 class Booking < ApplicationRecord
+  monetize :price_cents
+
   before_create :set_total_price
   after_create :create_chatroom
   after_create :create_notification
@@ -37,7 +39,7 @@ class Booking < ApplicationRecord
   end
 
   def set_total_price
-    self.total_price = duration * pokemon.price
+    self.price = duration * pokemon.price
   end
 
   def end_date_after_start_date

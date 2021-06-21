@@ -14,7 +14,7 @@
               You booked it from
               <strong> <%= booking.start_date %></strong>
               <strong>to <%= booking.end_date %></strong> for
-               <strong>$<%= booking.total_price %></strong>
+               <strong>$<%= booking.price %></strong>
             </p>
             <p>Status: <strong><%= booking.status.capitalize %></strong></p>
             <%= link_to "Chat with #{booking.pokemon.user.nickname.capitalize}", chatroom_path(booking.chatroom), class: "badge badge-danger" %>
@@ -51,7 +51,7 @@
                 You booked it from
                 <strong> <%= booking.start_date %></strong>
                 <strong>to <%= booking.end_date %></strong> for
-                <strong>$<%= booking.total_price %></strong>
+                <strong>$<%= booking.price %></strong>
               </p>
               <%= link_to "Chat with #{booking.user.nickname.capitalize}", chatroom_path(booking.chatroom), class: "badge badge-danger" %>
               <p>Status: <strong><%= booking.status.capitalize %></strong></p>
