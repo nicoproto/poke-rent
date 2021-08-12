@@ -1,4 +1,6 @@
 class Booking < ApplicationRecord
+  monetize :price_cents
+
   before_create :set_total_price
   after_create :create_chatroom
   after_create :create_notification
@@ -12,7 +14,7 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date
 
-  enum status: [ :pending, :accepted, :declined ]
+  enum status: [ :pending, :accepted, :declined, :paid ]
 
   def is_updatable?
     (start_date - Date.today) > 0
@@ -37,7 +39,7 @@ class Booking < ApplicationRecord
   end
 
   def set_total_price
-    self.total_price = duration * pokemon.price
+    self.price = duration * pokemon.price
   end
 
   def end_date_after_start_date

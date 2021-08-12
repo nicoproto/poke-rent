@@ -8,6 +8,8 @@ class Pokemon < ApplicationRecord
   acts_as_taggable_on :tags
   has_one_attached :photo
 
+  monetize :price_cents
+
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
