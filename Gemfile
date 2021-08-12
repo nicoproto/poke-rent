@@ -42,6 +42,9 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'money-rails'
 gem 'stripe'
 gem 'stripe_event'
+gem "sentry-ruby"
+gem "sentry-rails"
+
 
 group :development, :test do
   gem 'pry-byebug'
